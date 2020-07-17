@@ -12,6 +12,12 @@
 		C228D1EB24C13F070035065A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C228D1E924C13F070035065A /* Main.storyboard */; };
 		C228D1ED24C13F070035065A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C228D1EC24C13F070035065A /* Assets.xcassets */; };
 		C228D1F024C13F070035065A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C228D1EE24C13F070035065A /* LaunchScreen.storyboard */; };
+		C228D1FD24C13F6F0035065A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1F724C13F6D0035065A /* EditViewController.swift */; };
+		C228D1FE24C13F6F0035065A /* PinPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1F824C13F6D0035065A /* PinPad.swift */; };
+		C228D1FF24C13F6F0035065A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1F924C13F6F0035065A /* TableViewCell.swift */; };
+		C228D20024C13F6F0035065A /* PinDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FA24C13F6F0035065A /* PinDatabase.swift */; };
+		C228D20124C13F6F0035065A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FB24C13F6F0035065A /* BrowserViewController.swift */; };
+		C228D20224C13F6F0035065A /* DetailEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		C228D1EC24C13F070035065A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C228D1EF24C13F070035065A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C228D1F124C13F070035065A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C228D1F724C13F6D0035065A /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		C228D1F824C13F6D0035065A /* PinPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPad.swift; sourceTree = "<group>"; };
+		C228D1F924C13F6F0035065A /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		C228D1FA24C13F6F0035065A /* PinDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDatabase.swift; sourceTree = "<group>"; };
+		C228D1FB24C13F6F0035065A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				C228D1E524C13F070035065A /* AppDelegate.swift */,
+				C228D1FB24C13F6F0035065A /* BrowserViewController.swift */,
+				C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */,
+				C228D1F724C13F6D0035065A /* EditViewController.swift */,
+				C228D1FA24C13F6F0035065A /* PinDatabase.swift */,
+				C228D1F824C13F6D0035065A /* PinPad.swift */,
+				C228D1F924C13F6F0035065A /* TableViewCell.swift */,
 				C228D1E724C13F070035065A /* ViewController.swift */,
 				C228D1E924C13F070035065A /* Main.storyboard */,
 				C228D1EC24C13F070035065A /* Assets.xcassets */,
@@ -136,8 +154,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C228D20024C13F6F0035065A /* PinDatabase.swift in Sources */,
+				C228D20224C13F6F0035065A /* DetailEditViewController.swift in Sources */,
+				C228D20124C13F6F0035065A /* BrowserViewController.swift in Sources */,
+				C228D1FF24C13F6F0035065A /* TableViewCell.swift in Sources */,
 				C228D1E824C13F070035065A /* ViewController.swift in Sources */,
 				C228D1E624C13F070035065A /* AppDelegate.swift in Sources */,
+				C228D1FD24C13F6F0035065A /* EditViewController.swift in Sources */,
+				C228D1FE24C13F6F0035065A /* PinPad.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
