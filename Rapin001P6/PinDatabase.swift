@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class PinDatabase{
     // create only one instance
@@ -15,32 +16,35 @@ class PinDatabase{
     // database
     var lastPin: String
     var pinIndex: [String]!
-    var pairDatabase: [String : URL]!
+    var pairDatabase: [String : Employee]!
+    var timeCardDB: [TimeCardEntry]
+    
     
     private init() {
         lastPin = String()
         pairDatabase = [:]
         pinIndex = []
+        timeCardDB = []
         
-        pinIndex.append("0000")
-        pairDatabase["0000"] = URL(string: "https://www.apple.com")
+        let employee0 = Employee(first: "First Name", last: "Last Name", pin: "PIN")
+        addEmployee(employee: employee0)
         
-        pinIndex.append("0001")
-        pairDatabase["0001"] = URL(string: "https://www.google.com")
+        let employee1 = Employee(first: "Scott", last: "Malcom", pin: "0001")
+        addEmployee(employee: employee1)
         
-        pinIndex.append("0002")
-        pairDatabase["0002"] = URL(string: "https://www.yahoo.com")
-        
+        let employee2 = Employee(first: "Jim", last: "Jackson", pin: "0002")
+        addEmployee(employee: employee2)
     }
     
-    //add function to add item to the DB
-    @discardableResult func addPair(pin: String!, url: URL!) -> Int {
+    //add function to add new employee  to the DB
+    @discardableResult func addEmployee(employee: Employee) -> Int {
         // add to dictionry
-        pairDatabase[pin] = url
+        let pin = employee.pin
+        pairDatabase[pin!] = employee
         
         //add pin to collection for table view
-        pinIndex.append(pin)
-        let newIndex = pinIndex.index(of: pin)!
+        pinIndex.append(pin!)
+        let newIndex = pinIndex.index(of: pin!)!
         return newIndex
     }
     
@@ -60,15 +64,11 @@ class PinDatabase{
         pinIndex.insert(temp, at: indexTo)
     }
     
-    //add function to load URL
-    func returnURLRequest(pin: String) -> URLRequest? {
-        // find url from db
-        let url = pairDatabase[pin]
-        //create url request
-        let request = URLRequest(url: url!)
-        //segue to BrowserViewController
-        return request
+    func clockPunch(pin: String) -> Int {
+        // check if there is a previous punch for this user by poping the timecards[] and checking if the last entry has a clock out time
+        
+        //iff it does have a clock out time, create a new timeCardEntry without a clout time (== nil)
+        
+        //if it does not, set the 
     }
-    
-    
 }

@@ -9,45 +9,50 @@ import UIKit
 
 class DetailEditViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var pinField: UITextField!
-    @IBOutlet var urlField: UITextField!
-    
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var pinField: UITextField!
     // variables
     let maxPinLength = 4
     var oldPin: String = String()
-    var pin: String = String()
-    var url: URL = URL(string: "http://www.apple.com")!
+    var employee = Employee()
+    
+    
     
     override func viewDidLoad() {
-        pinField.keyboardType = .namePhonePad
-        urlField.keyboardType = .URL
+        firstNameField.keyboardType = .default
+        lastNameField.keyboardType = .default
         
+        firstNameField.clearButtonMode = .whileEditing
+        lastNameField.clearButtonMode = .whileEditing
         pinField.clearButtonMode = .whileEditing
-        urlField.clearButtonMode = .whileEditing
+        pinField.clearsOnInsertion = true
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        oldPin = pin
-        pinField.text = pin
-        urlField.text = url.absoluteString
+        oldPin = employee.pin
+        firstNameField.text = employee.firstName
+        lastNameField.text = employee.lastName
+        pinField.text = employee.pin
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // get all the needed data
-        let pin = pinField.text
-        let url = URL(string: urlField.text!)
+        let newFirstName = firstNameField.text
+        let newLastName = lastNameField.text
+        let newPin = pinField.text
         let oldPinIndex = PinDatabase.sharedInstance.pinIndex.index(of: oldPin)
         
         //update DB
-            
-        PinDatabase.sharedInstance.pinIndex[oldPinIndex!] = pin!
+        let newEmployeeItem = Employee(first: newFirstName, last: newLastName, pin: newPin)
+        PinDatabase.sharedInstance.pinIndex[oldPinIndex!] = newPin!
         PinDatabase.sharedInstance.pairDatabase.removeValue(forKey: self.oldPin)
         // will create new if key does not exist
-        PinDatabase.sharedInstance.pairDatabase.updateValue(url!, forKey: pin!)
+        PinDatabase.sharedInstance.pairDatabase.updateValue(newEmployeeItem, forKey: newPin!)
     }
 
     
@@ -66,7 +71,7 @@ class DetailEditViewController: UIViewController, UITextFieldDelegate {
     // will limit how many characters can go into pin field
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // setting the max lenght to maxPinSize
-        if (pinField.isFirstResponder){
+        if (firstNameField.isFirstResponder){
             let currentText: NSString = textField.text! as NSString
             let newText = currentText.replacingCharacters(in: range, with: string)
             

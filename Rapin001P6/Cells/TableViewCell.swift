@@ -11,15 +11,19 @@ class TableViewCell: UITableViewCell, UITextFieldDelegate {
     
 
     
+    @IBOutlet var firstNameField: UITextField!
+    @IBOutlet var lastNameField: UITextField!
     @IBOutlet var pinField: UITextField!
-    @IBOutlet var urlField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        firstNameField.text = ""
+        lastNameField.text = ""
         pinField.text = ""
-        urlField.text = ""
-
+        firstNameField.placeholder = "Enter First Name"
+        lastNameField.placeholder = "Enter Last Name"
+        pinField.placeholder = "Enter employee PIN number"
         
     }
 

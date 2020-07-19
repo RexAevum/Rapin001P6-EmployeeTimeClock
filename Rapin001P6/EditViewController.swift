@@ -52,21 +52,37 @@ class EditViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "link", for: indexPath) as! TableViewCell
         
         let gotPin = PinDatabase.sharedInstance.pinIndex[indexPath.row]
-        let url = PinDatabase.sharedInstance.pairDatabase[gotPin]
+        let employee = PinDatabase.sharedInstance.pairDatabase[gotPin]
         
-        cell.pinField.text = gotPin
-        cell.urlField.text = url?.absoluteString
+        cell.firstNameField.text = employee?.firstName
+        cell.lastNameField.text = employee?.lastName
+        cell.pinField.text = employee?.pin
+        
+        // disable selection for first cell, columb title cell
+        if (indexPath.row == 0){
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.isUserInteractionEnabled = false
+        }
         return cell
     }
  
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
+        let gotPin = PinDatabase.sharedInstance.pinIndex[indexPath.row]
+        let employee = PinDatabase.sharedInstance.pairDatabase[gotPin]
+        
+        if (indexPath.row == 0){
+            return false
+        } else if (employee?.firstName == "First Name" && employee?.lastName == "Last Name"){
+            return false
+        }
+        
         return true
     }
-    */
+ 
 
     
     // Override to support editing the table view.
@@ -90,17 +106,25 @@ class EditViewController: UITableViewController {
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        PinDatabase.sharedInstance.movePair(indexFrom: fromIndexPath.row, indexTo: to.row)
+            PinDatabase.sharedInstance.movePair(indexFrom: fromIndexPath.row, indexTo: to.row)
     }
  
 
-    /*
+    
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
+        if (indexPath.row == 0){
+            return false
+            
+        }
         return true
     }
-    */
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        <#code#>
+    }
+ 
 
     
     // MARK: - Navigation
@@ -112,30 +136,25 @@ class EditViewController: UITableViewController {
         switch segue.identifier {
         case "addNew"?:
             // pass new pair
-            let pin = "----"
-            let url = URL(string: "about:blank")
-            
+            let newEmployee = Employee()
             //add to db
-            PinDatabase.sharedInstance.pinIndex.append(pin)
-            PinDatabase.sharedInstance.addPair(pin: pin, url: url)
+            PinDatabase.sharedInstance.pinIndex.append(newEmployee.pin)
+            PinDatabase.sharedInstance.addEmployee(employee: newEmployee)
             
             // pass data in segue
             let targetView = segue.destination as! DetailEditViewController
-            targetView.pin = pin
-            targetView.url = url!
-            
+            targetView.employee = newEmployee
             print(self)
             break
         case "details"?:
             // pass pair based in the index
             if let index = tableView.indexPathForSelectedRow?.row{
                 let pin = PinDatabase.sharedInstance.pinIndex[index]
-                let url = PinDatabase.sharedInstance.pairDatabase[pin]
+                let employee = PinDatabase.sharedInstance.pairDatabase[pin]
                 
                 let targetView = segue.destination as! DetailEditViewController
                 
-                targetView.pin = pin
-                targetView.url = url!
+                targetView.employee = employee!
             }
           
                 

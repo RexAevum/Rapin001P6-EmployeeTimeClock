@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C228D1E624C13F070035065A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1E524C13F070035065A /* AppDelegate.swift */; };
-		C228D1E824C13F070035065A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1E724C13F070035065A /* ViewController.swift */; };
+		C228D1E824C13F070035065A /* TimeLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1E724C13F070035065A /* TimeLogViewController.swift */; };
 		C228D1EB24C13F070035065A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C228D1E924C13F070035065A /* Main.storyboard */; };
 		C228D1ED24C13F070035065A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C228D1EC24C13F070035065A /* Assets.xcassets */; };
 		C228D1F024C13F070035065A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C228D1EE24C13F070035065A /* LaunchScreen.storyboard */; };
@@ -16,14 +16,16 @@
 		C228D1FE24C13F6F0035065A /* PinPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1F824C13F6D0035065A /* PinPad.swift */; };
 		C228D1FF24C13F6F0035065A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1F924C13F6F0035065A /* TableViewCell.swift */; };
 		C228D20024C13F6F0035065A /* PinDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FA24C13F6F0035065A /* PinDatabase.swift */; };
-		C228D20124C13F6F0035065A /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FB24C13F6F0035065A /* BrowserViewController.swift */; };
 		C228D20224C13F6F0035065A /* DetailEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */; };
+		C228D20424C242EB0035065A /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20324C242EB0035065A /* Employee.swift */; };
+		C228D20624C26BFA0035065A /* TimeCardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20524C26BFA0035065A /* TimeCardEntry.swift */; };
+		C228D20924C28C530035065A /* TimeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20824C28C530035065A /* TimeCardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C228D1E224C13F070035065A /* Rapin001P6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rapin001P6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C228D1E524C13F070035065A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C228D1E724C13F070035065A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C228D1E724C13F070035065A /* TimeLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLogViewController.swift; sourceTree = "<group>"; };
 		C228D1EA24C13F070035065A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C228D1EC24C13F070035065A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C228D1EF24C13F070035065A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -32,8 +34,10 @@
 		C228D1F824C13F6D0035065A /* PinPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPad.swift; sourceTree = "<group>"; };
 		C228D1F924C13F6F0035065A /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C228D1FA24C13F6F0035065A /* PinDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinDatabase.swift; sourceTree = "<group>"; };
-		C228D1FB24C13F6F0035065A /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEditViewController.swift; sourceTree = "<group>"; };
+		C228D20324C242EB0035065A /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		C228D20524C26BFA0035065A /* TimeCardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardEntry.swift; sourceTree = "<group>"; };
+		C228D20824C28C530035065A /* TimeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,19 +71,37 @@
 			isa = PBXGroup;
 			children = (
 				C228D1E524C13F070035065A /* AppDelegate.swift */,
-				C228D1FB24C13F6F0035065A /* BrowserViewController.swift */,
+				C228D1E724C13F070035065A /* TimeLogViewController.swift */,
 				C228D1FC24C13F6F0035065A /* DetailEditViewController.swift */,
 				C228D1F724C13F6D0035065A /* EditViewController.swift */,
 				C228D1FA24C13F6F0035065A /* PinDatabase.swift */,
 				C228D1F824C13F6D0035065A /* PinPad.swift */,
-				C228D1F924C13F6F0035065A /* TableViewCell.swift */,
-				C228D1E724C13F070035065A /* ViewController.swift */,
+				C228D20A24C28D650035065A /* Objects */,
+				C228D20724C28C170035065A /* Cells */,
 				C228D1E924C13F070035065A /* Main.storyboard */,
 				C228D1EC24C13F070035065A /* Assets.xcassets */,
 				C228D1EE24C13F070035065A /* LaunchScreen.storyboard */,
 				C228D1F124C13F070035065A /* Info.plist */,
 			);
 			path = Rapin001P6;
+			sourceTree = "<group>";
+		};
+		C228D20724C28C170035065A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C228D1F924C13F6F0035065A /* TableViewCell.swift */,
+				C228D20824C28C530035065A /* TimeCardCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C228D20A24C28D650035065A /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				C228D20524C26BFA0035065A /* TimeCardEntry.swift */,
+				C228D20324C242EB0035065A /* Employee.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,11 +176,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C228D20924C28C530035065A /* TimeCardCell.swift in Sources */,
 				C228D20024C13F6F0035065A /* PinDatabase.swift in Sources */,
+				C228D20424C242EB0035065A /* Employee.swift in Sources */,
 				C228D20224C13F6F0035065A /* DetailEditViewController.swift in Sources */,
-				C228D20124C13F6F0035065A /* BrowserViewController.swift in Sources */,
 				C228D1FF24C13F6F0035065A /* TableViewCell.swift in Sources */,
-				C228D1E824C13F070035065A /* ViewController.swift in Sources */,
+				C228D1E824C13F070035065A /* TimeLogViewController.swift in Sources */,
+				C228D20624C26BFA0035065A /* TimeCardEntry.swift in Sources */,
 				C228D1E624C13F070035065A /* AppDelegate.swift in Sources */,
 				C228D1FD24C13F6F0035065A /* EditViewController.swift in Sources */,
 				C228D1FE24C13F6F0035065A /* PinPad.swift in Sources */,

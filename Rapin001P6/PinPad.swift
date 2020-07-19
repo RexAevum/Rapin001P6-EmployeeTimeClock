@@ -25,6 +25,7 @@ class PinPad: UIViewController, UITabBarDelegate {
     
     @IBOutlet var buttons: [UIButton]!
     
+    @IBOutlet weak var submitButton: UIButton!
     
     //MARK: Other Variables
     var enteredPin: String = ""
@@ -62,11 +63,10 @@ class PinPad: UIViewController, UITabBarDelegate {
         // Pass the selected object to the new view controller.
         
         switch segue.identifier {
-        case "loadPage"?:
+        case "logInSegue"?:
             
-            // pass pin
-            let browserView = segue.destination as! BrowserViewController
-            browserView.passedPin = enteredPin
+            // MARK: FIXME
+
             //use segue.destination to set the variables on the other side
             break
         default:
@@ -87,6 +87,8 @@ class PinPad: UIViewController, UITabBarDelegate {
     @IBAction func clear(_ sender: UIButton) {
         clearAllPinDigits()
     }
+    
+    //log the button action
     
     /*
      set's the appropriate digit
@@ -124,7 +126,7 @@ class PinPad: UIViewController, UITabBarDelegate {
             //MARK: chenge view in bar controller
             if (PinDatabase.sharedInstance.pairDatabase[enteredPin] != nil){
                 PinDatabase.sharedInstance.lastPin = enteredPin
-                tabBarController?.selectedIndex = 1
+                performSegue(withIdentifier: "logInSegue", sender: nil)
                 clearAllPinDigits()
             }
             else{
