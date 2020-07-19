@@ -120,12 +120,13 @@ class EditViewController: UITableViewController {
         }
         return true
     }
-    
+  
+    /*
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         <#code#>
     }
  
-
+*/
     
     // MARK: - Navigation
 
