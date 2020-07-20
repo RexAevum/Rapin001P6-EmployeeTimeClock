@@ -14,6 +14,8 @@ class PinDatabase{
     static let sharedInstance = PinDatabase()
     
     // database
+    let ADMIN = "0000"
+    
     var lastPin: String
     var pinIndex: [String]!
     var pairDatabase: [String : Employee]!
@@ -64,11 +66,48 @@ class PinDatabase{
         pinIndex.insert(temp, at: indexTo)
     }
     
-    func clockPunch(pin: String) -> Int {
+    fileprivate func createNewTimeCardEntry(_ pin: String, _ time: Date, _ user: Employee?) -> String? {
+        //if this is first entry - create new entry
+        let punch = TimeCardEntry(pin: pin, inTime: time, outTime: nil)
+        user?.timeCards.append(punch)
+        timeCardDB.append(punch)
+        return String(describing: timeCardDB.index(of: punch))
+    }
+    
+    @discardableResult func clockPunch(pin: String, time: Date) -> String? {
+        //check if pin is admin pin
+        if (pin == ADMIN) {return "Admin"}
+        // if user number is wrong, return error
+        let user = pairDatabase[pin]
+        if (user == nil) {return "Incorrect PIN"}
+        
         // check if there is a previous punch for this user by poping the timecards[] and checking if the last entry has a clock out time
+        let lastPunch = user?.timeCards.last
+        if lastPunch == nil{
+            return createNewTimeCardEntry(pin, time, user)
+        }
+        else if (lastPunch?.clockOut == nil){
+            //if it does not, set the clock out time to the passed time - time
+            user?.timeCards.removeLast()
+            // remove from main db and add updated entry to db and employee
+            let index = timeCardDB.index(of: lastPunch!)
+            timeCardDB.remove(at: index!)
+            
+            //add new
+            let newPunch = TimeCardEntry(pin: pin, inTime: (lastPunch?.clockIn)!, outTime: time)
+            user?.timeCards.append(newPunch)
+            timeCardDB.append(newPunch)
+            return String(describing: timeCardDB.index(of: newPunch))
+        }
+        else{
+            //iff it does have a clock out time, create a new timeCardEntry without a clock time (== nil)
+            return createNewTimeCardEntry(pin, time, user)
+        }
         
-        //iff it does have a clock out time, create a new timeCardEntry without a clout time (== nil)
         
-        //if it does not, set the 
+        //update timecard if it exists in timeCardDB and update it in the user collection of timecard
+        
+        //return the index of the timecardentry in the DB
+        return "Error: End of options of punch"
     }
 }
