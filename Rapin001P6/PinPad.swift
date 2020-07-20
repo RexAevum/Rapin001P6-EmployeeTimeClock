@@ -124,24 +124,31 @@ class PinPad: UIViewController, UITabBarDelegate {
                 enteredPin += String(givenDigit)
             }
             //MARK: chenge view in bar controller
-            if (PinDatabase.sharedInstance.pairDatabase[enteredPin] != nil){
+            
+            if let punch = PinDatabase.sharedInstance.clockPunch(pin: enteredPin, time: Date()){
                 PinDatabase.sharedInstance.lastPin = enteredPin
-                performSegue(withIdentifier: "logInSegue", sender: nil)
-                clearAllPinDigits()
+                if punch == "nopin"{
+                    // add alert for when code is wrong
+                    let title = "Incorrect PIN"
+                    let message = "The code you have entered is not a valid employee number."
+                    let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    let alertOk = UIAlertAction(title: "OK", style: .cancel, handler: {(action) -> Void in
+                        self.clearAllPinDigits()
+                    })
+                    alertControl.addAction(alertOk)
+                    present(alertControl, animated: true, completion: nil)
+                    
+                }
+                else if punch == "admin"{
+                    performSegue(withIdentifier: "logInSegue", sender: nil)
+                }
+                else{
+                print(punch)
+            }
             }
             else{
-                // add alert for when code is wrong
-                let title = "Incorrect PIN"
-                let message = "The code you have entered is not a valid employee number."
-                let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                let alertOk = UIAlertAction(title: "OK", style: .cancel, handler: {(action) -> Void in
-                    self.clearAllPinDigits()
-                })
-                alertControl.addAction(alertOk)
-                present(alertControl, animated: true, completion: nil)
-                
-                
-                
+                clearAllPinDigits()
+                print("Error")
             }
             return true
         }

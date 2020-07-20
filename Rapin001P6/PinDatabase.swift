@@ -36,6 +36,9 @@ class PinDatabase{
         
         let employee2 = Employee(first: "Jim", last: "Jackson", pin: "0002")
         addEmployee(employee: employee2)
+        
+        timeCardDB.append(TimeCardEntry(pin: "0001", inTime: Date(), outTime: nil))
+        timeCardDB.append(TimeCardEntry(pin: "0001", inTime: Date(), outTime: Date()))
     }
     
     //add function to add new employee  to the DB
@@ -76,10 +79,10 @@ class PinDatabase{
     
     @discardableResult func clockPunch(pin: String, time: Date) -> String? {
         //check if pin is admin pin
-        if (pin == ADMIN) {return "Admin"}
+        if (pin == ADMIN) {return "admin"}
         // if user number is wrong, return error
         let user = pairDatabase[pin]
-        if (user == nil) {return "Incorrect PIN"}
+        if (user == nil) {return "nopin"}
         
         // check if there is a previous punch for this user by poping the timecards[] and checking if the last entry has a clock out time
         let lastPunch = user?.timeCards.last
