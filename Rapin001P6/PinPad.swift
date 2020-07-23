@@ -36,25 +36,28 @@ class PinPad: UIViewController, UITabBarDelegate {
 
     
     override func viewDidLoad() {
+     
         super.viewDidLoad()
         //add timer for reprinting the the clock timer
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(tick), userInfo: nil, repeats: true)
   
-        clearAllPinDigits()
+        
+       _ =  timeLabel.adjustsFontSizeToFitWidth
+        timeLabel.text = ""
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        clearAllPinDigits()
+        submitButton.titleLabel?.text = ""
     }
     
     @objc func tick(){
         timeLabel.text = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    
+   
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -89,6 +92,35 @@ class PinPad: UIViewController, UITabBarDelegate {
     }
     
     //log the button action
+    @IBAction func log(_ sender: UIButton) {
+        
+        
+        if let punch = PinDatabase.sharedInstance.clockPunch(pin: enteredPin, time: Date()){
+            PinDatabase.sharedInstance.lastPin = enteredPin
+            if punch == "nopin"{
+                // add alert for when code is wrong
+                let title = "Incorrect PIN"
+                let message = "The code you have entered is not a valid employee number."
+                let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                let alertOk = UIAlertAction(title: "OK", style: .cancel, handler: {(action) -> Void in
+                    self.clearAllPinDigits()
+                })
+                alertControl.addAction(alertOk)
+                present(alertControl, animated: true, completion: nil)
+                
+            }
+            else if punch == "admin"{
+                performSegue(withIdentifier: "logInSegue", sender: nil)
+            }
+            else{
+                print(punch)
+            }
+        }
+        else{
+            clearAllPinDigits()
+            print("Error")
+        }
+    }
     
     /*
      set's the appropriate digit
@@ -122,49 +154,62 @@ class PinPad: UIViewController, UITabBarDelegate {
             digit_4.text = String(givenDigit)
             if (enteredPin.count < PIN_LENGHT){
                 enteredPin += String(givenDigit)
-            }
-            //MARK: chenge view in bar controller
-            
-            if let punch = PinDatabase.sharedInstance.clockPunch(pin: enteredPin, time: Date()){
-                PinDatabase.sharedInstance.lastPin = enteredPin
-                if punch == "nopin"{
-                    // add alert for when code is wrong
-                    let title = "Incorrect PIN"
-                    let message = "The code you have entered is not a valid employee number."
-                    let alertControl = UIAlertController(title: title, message: message, preferredStyle: .alert)
-                    let alertOk = UIAlertAction(title: "OK", style: .cancel, handler: {(action) -> Void in
-                        self.clearAllPinDigits()
-                    })
-                    alertControl.addAction(alertOk)
-                    present(alertControl, animated: true, completion: nil)
+                
+                if(enteredPin == PinDatabase.sharedInstance.ADMIN){
+                    submitButton.setTitle("ADMIN", for: .normal)
                     
-                }
-                else if punch == "admin"{
-                    performSegue(withIdentifier: "logInSegue", sender: nil)
+                    return true
                 }
                 else{
-                print(punch)
+                    let isClocked = isClockedIn(pin: enteredPin)
+                    if isClocked == true {
+                        submitButton.setTitle("PUNCH OUT", for: .normal)
+                    }
+                    else {
+                        submitButton.setTitle("PUNCH IN", for: .normal)
+                    }
+                    
+                }
             }
-            }
-            else{
-                clearAllPinDigits()
-                print("Error")
-            }
+            //MARK: chenge view in bar controller
             return true
         }
         // all digits have been set, ignore the input
         return false
     }
     
-    
+    //MARK:- custom func
     fileprivate func clearAllPinDigits() {
        //sleep(5)
-        print(enteredPin)
+        //print(enteredPin)
         digit_1.text = PLACE_HOLDER
         digit_2.text = PLACE_HOLDER
         digit_3.text = PLACE_HOLDER
         digit_4.text = PLACE_HOLDER
         enteredPin = ""
+        submitButton.titleLabel?.text = ""
+    }
+    
+    fileprivate func isClockedIn(pin: String) -> Bool?{
+        // check what the last time card entry is
+        let user = PinDatabase.sharedInstance.pairDatabase[pin]
+        // if user doesn't exist, set to punch in
+        if user == nil {return nil}
+        
+        //get last punch
+        let lastPunch = user?.timeCards.last
+        
+        //if its full (has clock out time) or doesnt exist -> return false
+        if (lastPunch == nil || lastPunch?.clockOut != nil){
+            return false
+        }
+        //if exist time entry without clock out time -> return false
+        else if (lastPunch?.clockOut == nil){
+            return true
+        }
+        
+        // return nil for no info
+        return nil
     }
     
 

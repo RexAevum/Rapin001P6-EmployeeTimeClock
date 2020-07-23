@@ -8,7 +8,21 @@
 
 import Foundation
 
-class Employee: NSObject{
+class Employee: NSObject, NSCoding{
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(firstName, forKey: "firstName")
+        aCoder.encode(lastName, forKey: "lastName")
+        aCoder.encode(pin, forKey: "pin")
+        aCoder.encode(timeCards, forKey: "timeCards")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        firstName = aDecoder.decodeObject(forKey: "firstName") as! String
+        lastName = aDecoder.decodeObject(forKey: "lastName") as! String
+        pin = aDecoder.decodeObject(forKey: "pin") as! String
+        timeCards = aDecoder.decodeObject(forKey: "timeCards") as! [TimeCardEntry]
+    }
+    
     
     var firstName: String!
     var lastName: String!

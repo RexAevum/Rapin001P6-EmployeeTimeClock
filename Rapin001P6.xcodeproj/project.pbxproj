@@ -20,6 +20,7 @@
 		C228D20424C242EB0035065A /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20324C242EB0035065A /* Employee.swift */; };
 		C228D20624C26BFA0035065A /* TimeCardEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20524C26BFA0035065A /* TimeCardEntry.swift */; };
 		C228D20924C28C530035065A /* TimeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C228D20824C28C530035065A /* TimeCardCell.swift */; };
+		C228D20F24C909D80035065A /* EmployeeTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C228D20D24C909D80035065A /* EmployeeTime.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C228D20324C242EB0035065A /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		C228D20524C26BFA0035065A /* TimeCardEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardEntry.swift; sourceTree = "<group>"; };
 		C228D20824C28C530035065A /* TimeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCardCell.swift; sourceTree = "<group>"; };
+		C228D20E24C909D80035065A /* EmployeeTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmployeeTime.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				C228D1F724C13F6D0035065A /* EditViewController.swift */,
 				C228D1FA24C13F6F0035065A /* PinDatabase.swift */,
 				C228D1F824C13F6D0035065A /* PinPad.swift */,
+				C228D20C24C909A10035065A /* Data */,
 				C228D20A24C28D650035065A /* Objects */,
 				C228D20724C28C170035065A /* Cells */,
 				C228D1E924C13F070035065A /* Main.storyboard */,
@@ -102,6 +105,14 @@
 				C228D20324C242EB0035065A /* Employee.swift */,
 			);
 			path = Objects;
+			sourceTree = "<group>";
+		};
+		C228D20C24C909A10035065A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C228D20D24C909D80035065A /* EmployeeTime.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C228D20924C28C530035065A /* TimeCardCell.swift in Sources */,
+				C228D20F24C909D80035065A /* EmployeeTime.xcdatamodeld in Sources */,
 				C228D20024C13F6F0035065A /* PinDatabase.swift in Sources */,
 				C228D20424C242EB0035065A /* Employee.swift in Sources */,
 				C228D20224C13F6F0035065A /* DetailEditViewController.swift in Sources */,
@@ -370,6 +382,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C228D20D24C909D80035065A /* EmployeeTime.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C228D20E24C909D80035065A /* EmployeeTime.xcdatamodel */,
+			);
+			currentVersion = C228D20E24C909D80035065A /* EmployeeTime.xcdatamodel */;
+			path = EmployeeTime.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C228D1DA24C13F070035065A /* Project object */;
 }

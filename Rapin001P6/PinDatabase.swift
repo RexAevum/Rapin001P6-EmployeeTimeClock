@@ -9,8 +9,38 @@ import Foundation
 import UIKit
 import CoreData
 
-class PinDatabase{
+class PinDatabase: NSObject, NSCoding{
+    func encode(with aCoder: NSCoder) {
+        // aCoder.encode
+        aCoder.encode(pinIndex, forKey: "pinIndex")
+        aCoder.encode(pairDatabase, forKey: "pairDatabase")
+        aCoder.encode(timeCardDB, forKey: "timeCardDB")
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        //
+        pinIndex = aDecoder.decodeObject(forKey: "pinIndex") as! [String]
+        pairDatabase = aDecoder.decodeObject(forKey: "pairDatabase") as! [String : Employee]
+        timeCardDB = aDecoder.decodeObject(forKey: "timeCardDB") as! [TimeCardEntry]
+        lastPin = String()
+        super.init()
+    }
+    
+    override init() {
+        pinIndex = []
+        pairDatabase = [:]
+        timeCardDB = []
+        lastPin = String()
+    }
+    
+
+ 
+    
+
+    
     // create only one instance
+    let coder = NSCoder()
     static let sharedInstance = PinDatabase()
     
     // database
@@ -21,25 +51,24 @@ class PinDatabase{
     var pairDatabase: [String : Employee]!
     var timeCardDB: [TimeCardEntry]
     
+    // filepaths for new archives
+    let indexURL: URL = {
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        var dirNext = dir.first
+        return (dirNext?.appendingPathComponent("employees.archive"))!
+    }()
+    let pairsURL: URL = {
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        var dirNext = dir.first
+        return (dirNext?.appendingPathComponent("pairs.archive"))!
+    }()
+    let timeCardsURL: URL = {
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        var dirNext = dir.first
+        return (dirNext?.appendingPathComponent("timeCards.archive"))!
+    }()
+
     
-    private init() {
-        lastPin = String()
-        pairDatabase = [:]
-        pinIndex = []
-        timeCardDB = []
-        
-        let employee0 = Employee(first: "First Name", last: "Last Name", pin: "PIN")
-        addEmployee(employee: employee0)
-        
-        let employee1 = Employee(first: "Scott", last: "Malcom", pin: "0001")
-        addEmployee(employee: employee1)
-        
-        let employee2 = Employee(first: "Jim", last: "Jackson", pin: "0002")
-        addEmployee(employee: employee2)
-        
-        timeCardDB.append(TimeCardEntry(pin: "0001", inTime: Date(), outTime: nil))
-        timeCardDB.append(TimeCardEntry(pin: "0001", inTime: Date(), outTime: Date()))
-    }
     
     //add function to add new employee  to the DB
     @discardableResult func addEmployee(employee: Employee) -> Int {
@@ -71,7 +100,7 @@ class PinDatabase{
     
     fileprivate func createNewTimeCardEntry(_ pin: String, _ time: Date, _ user: Employee?) -> String? {
         //if this is first entry - create new entry
-        let punch = TimeCardEntry(pin: pin, inTime: time, outTime: nil)
+        let punch = TimeCardEntry(pin: pin, inTime: time, outTime: nil, clockedIn: nil)
         user?.timeCards.append(punch)
         timeCardDB.append(punch)
         return String(describing: timeCardDB.index(of: punch))
@@ -97,7 +126,7 @@ class PinDatabase{
             timeCardDB.remove(at: index!)
             
             //add new
-            let newPunch = TimeCardEntry(pin: pin, inTime: (lastPunch?.clockIn)!, outTime: time)
+            let newPunch = TimeCardEntry(pin: pin, inTime: (lastPunch?.clockIn)!, outTime: time, clockedIn: false)
             user?.timeCards.append(newPunch)
             timeCardDB.append(newPunch)
             return String(describing: timeCardDB.index(of: newPunch))
@@ -113,4 +142,28 @@ class PinDatabase{
         //return the index of the timecardentry in the DB
         return "Error: End of options of punch"
     }
+
+    @discardableResult func saveToDB() -> Bool {
+        let s1 = NSKeyedArchiver.archiveRootObject(pinIndex, toFile: indexURL.path)
+        let s2 = NSKeyedArchiver.archiveRootObject(pairDatabase, toFile: pairsURL.path)
+        let s3 = NSKeyedArchiver.archiveRootObject(timeCardDB, toFile: timeCardsURL.path)
+        
+        return s1  && s3
+        
+    }
+    
+    @discardableResult func loadFromDB() -> Bool {
+        if let l1 = NSKeyedUnarchiver.unarchiveObject(withFile: indexURL.path) as? [String]{
+            pinIndex = l1
+        }
+        if let l2 = NSKeyedUnarchiver.unarchiveObject(withFile: pairsURL.path) as? [String : Employee]{
+            pairDatabase = l2
+        }
+        if let l3 = NSKeyedUnarchiver.unarchiveObject(withFile: timeCardsURL.path) as? [TimeCardEntry]{
+            timeCardDB = l3
+        }
+        
+        return true
+    }
+    
 }

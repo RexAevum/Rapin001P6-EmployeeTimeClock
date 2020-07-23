@@ -161,10 +161,13 @@ class EditViewController: UITableViewController {
                 
         
             print(self)
+        case "logOutFromLogSegue"?:
+            break
         default:
             preconditionFailure("Unknown segue")
         }
     }
- 
+
+    
 
 }
