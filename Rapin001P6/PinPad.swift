@@ -2,8 +2,8 @@
 //  PANTHERID: 6044121
 //  CLASS: COP 465501 TR 5:00
 //  INSTRUCTOR: Steve Luis ECS 282
-//  ASSIGNMENT: Programming Assignment #5
-//  DUE: Thursday 07/12/2020 //
+//  ASSIGNMENT: Programming Assignment #6
+//  DUE: Thursday 07/26/2020 //
 
 import UIKit
 import CoreData
@@ -44,6 +44,7 @@ class PinPad: UIViewController, UITabBarDelegate {
         
        _ =  timeLabel.adjustsFontSizeToFitWidth
         timeLabel.text = ""
+        submitButton.alpha = 0
         // Do any additional setup after loading the view.
     }
     
@@ -97,6 +98,7 @@ class PinPad: UIViewController, UITabBarDelegate {
         
         if let punch = PinDatabase.sharedInstance.clockPunch(pin: enteredPin, time: Date()){
             PinDatabase.sharedInstance.lastPin = enteredPin
+            clearAllPinDigits()
             if punch == "nopin"{
                 // add alert for when code is wrong
                 let title = "Incorrect PIN"
@@ -117,8 +119,8 @@ class PinPad: UIViewController, UITabBarDelegate {
             }
         }
         else{
-            clearAllPinDigits()
             print("Error")
+            clearAllPinDigits()
         }
     }
     
@@ -154,7 +156,7 @@ class PinPad: UIViewController, UITabBarDelegate {
             digit_4.text = String(givenDigit)
             if (enteredPin.count < PIN_LENGHT){
                 enteredPin += String(givenDigit)
-                
+                submitButton.alpha = 1
                 if(enteredPin == PinDatabase.sharedInstance.ADMIN){
                     submitButton.setTitle("ADMIN", for: .normal)
                     
@@ -188,6 +190,7 @@ class PinPad: UIViewController, UITabBarDelegate {
         digit_4.text = PLACE_HOLDER
         enteredPin = ""
         submitButton.titleLabel?.text = ""
+        submitButton.alpha = 0
     }
     
     fileprivate func isClockedIn(pin: String) -> Bool?{

@@ -2,8 +2,8 @@
 //  PANTHERID: 6044121
 //  CLASS: COP 465501 TR 5:00
 //  INSTRUCTOR: Steve Luis ECS 282
-//  ASSIGNMENT: Programming Assignment #5
-//  DUE: Thursday 07/12/2020 //
+//  ASSIGNMENT: Programming Assignment #6
+//  DUE: Thursday 07/26/2020 //
 
 import UIKit
 

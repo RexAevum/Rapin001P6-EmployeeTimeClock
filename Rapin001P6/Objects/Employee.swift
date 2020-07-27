@@ -1,10 +1,9 @@
-//
-//  Employee.swift
-//  Rapin001P6
-//
-//  Created by Rolans Apinis on 7/17/20.
-//  Copyright © 2020 Rolans Apinis. All rights reserved.
-//
+//  PROGRAMMER: Rolans Apinis
+//  PANTHERID: 6044121
+//  CLASS: COP 465501 TR 5:00
+//  INSTRUCTOR: Steve Luis ECS 282
+//  ASSIGNMENT: Programming Assignment #6
+//  DUE: Thursday 07/26/2020 //
 
 import Foundation
 

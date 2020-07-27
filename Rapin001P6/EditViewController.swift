@@ -2,8 +2,8 @@
 //  PANTHERID: 6044121
 //  CLASS: COP 465501 TR 5:00
 //  INSTRUCTOR: Steve Luis ECS 282
-//  ASSIGNMENT: Programming Assignment #5
-//  DUE: Thursday 07/12/2020 //
+//  ASSIGNMENT: Programming Assignment #6
+//  DUE: Thursday 07/26/2020 //
 
 import UIKit
 
@@ -67,7 +67,7 @@ class EditViewController: UITableViewController {
     }
  
 
-    
+  /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -82,7 +82,7 @@ class EditViewController: UITableViewController {
         
         return true
     }
- 
+ */
 
     
     // Override to support editing the table view.

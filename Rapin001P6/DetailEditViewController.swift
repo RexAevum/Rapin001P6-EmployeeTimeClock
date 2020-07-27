@@ -2,8 +2,8 @@
 //  PANTHERID: 6044121
 //  CLASS: COP 465501 TR 5:00
 //  INSTRUCTOR: Steve Luis ECS 282
-//  ASSIGNMENT: Programming Assignment #5
-//  DUE: Thursday 07/12/2020 //
+//  ASSIGNMENT: Programming Assignment #6
+//  DUE: Thursday 07/26/2020 //
 
 import UIKit
 
@@ -68,18 +68,28 @@ class DetailEditViewController: UIViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
     
-    // will limit how many characters can go into pin field
+    /* will limit how many characters can go into pin field
+ */
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // setting the max lenght to maxPinSize
-        if (firstNameField.isFirstResponder){
+        if (pinField.isFirstResponder){
             let currentText: NSString = textField.text! as NSString
             let newText = currentText.replacingCharacters(in: range, with: string)
             
-            return newText.count <= maxPinLength
+            let checkLenght = newText.count <= maxPinLength
+            let checkAdmin = PinDatabase.sharedInstance.ADMIN == newText
+            let checkDouble = { () -> Bool in
+                if  checkAdmin || PinDatabase.sharedInstance.pinIndex.contains(newText){
+                    textField.text = "Code unavailable"
+                    return false
+                    
+                }
+                else {return true}
+            }
+            // need to add () at hte end of a closure variable
+            return checkDouble() && checkLenght
         }
-        else{
-            return true
-        }
+        return true
     }
     
 
